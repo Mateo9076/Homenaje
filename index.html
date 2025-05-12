@@ -1,4 +1,43 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -270,12 +309,10 @@
         }
 
         @keyframes pulse {
-
             0%,
             100% {
                 box-shadow: 0 0 20px var(--shadow-color);
             }
-
             50% {
                 box-shadow: 0 0 40px var(--primary-color);
             }
@@ -317,12 +354,10 @@
         }
 
         @keyframes waveMove {
-
             0%,
             100% {
                 transform: translateX(0);
             }
-
             50% {
                 transform: translateX(-100px);
             }
@@ -332,7 +367,6 @@
             0% {
                 transform: rotate(0deg);
             }
-
             100% {
                 transform: rotate(360deg);
             }
@@ -501,11 +535,9 @@
             0% {
                 box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
             }
-
             50% {
                 box-shadow: 0 0 30px var(--primary-color), 0 0 60px var(--primary-color);
             }
-
             100% {
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
             }
@@ -739,7 +771,6 @@
                 opacity: 0;
                 transform: translateY(100px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -767,6 +798,61 @@
             z-index: 0;
             transform: translateX(-50%);
             transition: height 0.1s ease;
+        }
+
+        /* Estilos para el modal de video */
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .video-modal.active {
+            display: flex;
+        }
+
+        .video-modal-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            width: auto;
+            height: auto;
+        }
+
+        .video-modal-content video {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            border-radius: 15px;
+            box-shadow: 0 0 40px var(--shadow-color);
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+
+        .video-modal-close:hover {
+            transform: scale(1.1);
+            background: #ffd700;
         }
 
         /* Responsividad para laptops (hasta 1024px) */
@@ -890,6 +976,10 @@
 
             .video-container {
                 max-width: 700px;
+            }
+
+            .video-modal-content video {
+                max-height: 70vh;
             }
         }
 
@@ -1051,6 +1141,16 @@
 
             .wave {
                 height: 120px;
+            }
+
+            .video-modal-content video {
+                max-height: 60vh;
+            }
+
+            .video-modal-close {
+                top: -35px;
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
             }
         }
 
@@ -1243,6 +1343,16 @@
             .wave {
                 height: 80px;
             }
+
+            .video-modal-content video {
+                max-height: 50vh;
+            }
+
+            .video-modal-close {
+                top: -30px;
+                padding: 0.3rem 0.7rem;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -1263,6 +1373,17 @@
     </div>
     <div class="ia-avatar" id="iaAvatar" aria-hidden="true"></div>
     <div class="ia-text-box" id="iaTextBox" aria-live="polite" aria-hidden="true"></div>
+
+    <!-- Modal para videos -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" id="videoModalClose" aria-label="Cerrar video">Cerrar</button>
+            <video id="modalVideo" controls autoplay>
+                <source id="modalVideoSource">
+                Tu navegador no soporta video.
+            </video>
+        </div>
+    </div>
 
     <header>
         <video autoplay muted loop poster="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0">
@@ -1357,7 +1478,7 @@
                 </div>
                 <div class="gallery-item" data-type="opinion">
                     <video controls muted loop>
-                        <source src="IMG/QZSU6337.mp4">
+                        <source src="QZSU6337.mp4">
                         Tu navegador no soporta video.
                     </video>
                 </div>
@@ -1389,7 +1510,7 @@
         <h2>Un Tributo a Starling Rosario</h2>
         <div class="video-container">
             <video controls poster="IMG/fondo negro.jpg">
-                <source src="IMG/">
+                <source src="QZSU6337.mp4">
                 Tu navegador no soporta video.
             </video>
         </div>
@@ -1399,9 +1520,10 @@
         <div class="section-overlay"></div>
         <h2>Código QR</h2>
         <div class="ar-container">
-            <p>Escanea el código QR con tu cámara móvil para disfrutar desde tu telefeono</p>
-            <img src="Qr.jpg"alt="Código QR para filtro AR" class="qr-code">
-            <a href="https://mateo9076.github.io/Homenaje/" class="ar-btn" target="_blank"
+            <p>Escanea el código QR con tu cámara móvil para disfrutar la página en honor a Starling Rosario.</p>
+            <img src="Qr.jpg"
+                alt="Código QR para filtro AR" class="qr-code">
+            <a href="" class="ar-btn" target="_blank"
                 aria-label="Acceder al filtro AR">Escanear</a>
         </div>
     </section>
@@ -1653,6 +1775,34 @@
         recognition.maxAlternatives = 1;
         let isListening = false;
 
+        // Modal de video
+        const videoModal = document.getElementById('videoModal');
+        const videoModalClose = document.getElementById('videoModalClose');
+        const modalVideo = document.getElementById('modalVideo');
+        const modalVideoSource = document.getElementById('modalVideoSource');
+
+        function openVideoModal(videoSrc) {
+            modalVideoSource.src = videoSrc;
+            modalVideo.load();
+            videoModal.classList.add('active');
+            modalVideo.play();
+        }
+
+        function closeVideoModal() {
+            videoModal.classList.remove('active');
+            modalVideo.pause();
+            modalVideo.currentTime = 0;
+            modalVideoSource.src = '';
+        }
+
+        videoModalClose.addEventListener('click', closeVideoModal);
+
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                closeVideoModal();
+            }
+        });
+
         const personData = {
             name: "Starling Rosario",
             birth: "24 de septiembre de 1976",
@@ -1824,18 +1974,12 @@
                                         response = `El color favorito de ${personData.name} es el ${personData.favoriteColor}.`;
                                         break;
                                     case "hobby":
-                                        response = `${personData.name} disfruta ${personData.hobby.join(", ")}. Mira su video cantando en la galería, sección "Momentos Especiales".`;
-                                        const singingVideoItem = document.querySelector('#specialSection .gallery-item[data-type="singing"]');
-                                        const singingVideo = singingVideoItem?.querySelector('video');
-                                        if (singingVideoItem && singingVideo) {
-                                            showSection(specialSection, specialBtn);
-                                            setTimeout(() => {
-                                                singingVideoItem.classList.add('highlight');
-                                                singingVideoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                                singingVideo.play();
-                                                setTimeout(() => singingVideoItem.classList.remove('highlight'), 3000);
-                                            }, 500);
-                                        }
+                                        response = `${personData.name} disfruta ${personData.hobby.join(", ")}. Aquí tienes un video de él cantando.`;
+                                        const singingVideoSrc = "IMG/hobbie.mp4";
+                                        showSection(specialSection, specialBtn);
+                                        setTimeout(() => {
+                                            openVideoModal(singingVideoSrc);
+                                        }, 500);
                                         break;
                                     case "ciudad":
                                         response = `${personData.name} nació en ${personData.city}, un lugar que siempre llevó en su corazón.`;
@@ -1864,18 +2008,12 @@
                                         window.scrollTo({ top: document.querySelector('.tribute-video').offsetTop, behavior: 'smooth' });
                                         break;
                                     case "opinion":
-                                        response = `La opinión del señor Starling Rosario está en el video donde expresa sus pensamientos, ubicado en la galería, sección "Momentos Especiales".`;
-                                        const opinionVideoItem = document.querySelector('#specialSection .gallery-item[data-type="opinion"]');
-                                        const opinionVideo = opinionVideoItem?.querySelector('video');
-                                        if (opinionVideoItem && opinionVideo) {
-                                            showSection(specialSection, specialBtn);
-                                            setTimeout(() => {
-                                                opinionVideoItem.classList.add('highlight');
-                                                opinionVideoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                                opinionVideo.play();
-                                                setTimeout(() => opinionVideoItem.classList.remove('highlight'), 3000);
-                                            }, 500);
-                                        }
+                                        response = `La opinión del señor Starling Rosario está en este video donde expresa sus pensamientos.`;
+                                        const opinionVideoSrc = "QZSU6337.mp4";
+                                        showSection(specialSection, specialBtn);
+                                        setTimeout(() => {
+                                            openVideoModal(opinionVideoSrc);
+                                        }, 500);
                                         break;
                                     case "ar":
                                         response = `El filtro de Realidad Aumentada está en la sección "Código QR".`;
@@ -1948,20 +2086,30 @@
         };
 
         recognition.onerror = (event) => {
-            console.error(`Speech recognition error: ${event.error}`);
+            console.error("Error de reconocimiento:", event.error);
+            iaTextBox.textContent = "Error al escuchar. Por favor, intenta de nuevo.";
+            iaTextBox.classList.add('visible');
+            iaTextBox.setAttribute('aria-hidden', 'false');
+            setTimeout(() => {
+                iaTextBox.classList.remove('visible');
+                iaTextBox.setAttribute('aria-hidden', 'true');
+                iaTextBox.textContent = '';
+            }, 3000);
             isListening = false;
             voiceBtn.classList.remove('active');
             voiceBtn.textContent = 'Hablar';
-            speak("Lo siento, no pude entenderte. Por favor, intenta de nuevo.");
         };
 
         textBtn.addEventListener('click', () => {
-            const question = iaInput.value;
-            const response = processQuestion(question);
-            speak(response);
-            iaInput.value = '';
+            const input = iaInput.value.trim();
+            if (input) {
+                const response = processQuestion(input);
+                speak(response);
+                iaInput.value = '';
+            }
         });
 
+        // Detectar tecla "Enter" en el input
         iaInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 textBtn.click();
