@@ -1,4 +1,4 @@
-<script type="text/javascript">
+        <script type="text/javascript">
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};
         var gk_fileData = {};
@@ -1902,7 +1902,7 @@
                 return "¡Hola, Starling Rosario! Soy Mucer, tu asistente virtual. Bienvenido a este homenaje creado para celebrar tu vida y legado. ¿Cómo puedo ayudarte hoy?";
             }
 
-            const activationPhrase = /^(hola\s*mucer|buenos\s*dias\s*mucer)\b/;
+            const activationPhrase = /^(hola\s*mucer|hola\muser|buenos\s*dias\s*mucer)\b/;
             const isActivation = activationPhrase.test(input);
             if (isActivation) {
                 greeting = "Hola, soy Mucer, tu asistente virtual. Estoy aquí para compartir el legado de Starling Rosario. ¿En qué puedo ayudarte?";
@@ -2009,7 +2009,7 @@
                                         break;
                                     case "opinion":
                                         response = `La opinión del señor Starling Rosario está en este video donde expresa sus pensamientos.`;
-                                        const opinionVideoSrc = "QZSU6337.mp4";
+                                        const opinionVideoSrc = "IMG/QZSU6337.mp4";
                                         showSection(specialSection, specialBtn);
                                         setTimeout(() => {
                                             openVideoModal(opinionVideoSrc);
