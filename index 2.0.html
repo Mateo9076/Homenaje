@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Homenaje a Starling Rosario, una vida de sueños audaces y bondad desbordante.">
+    <meta property="og:title" content="Homenaje a Starling Rosario">
+    <meta property="og:description" content="Descubre la vida y el legado de Itfam, una inspiración eterna.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0">
+    <meta property="og:url" content="https://tu-sitio.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>Homenaje a Starling Rosario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ffd700;
+            --secondary-color: #00b7eb;
+            --background-color: #0a0a0a;
+            --text-color: #fff;
+            --overlay-color: rgba(0, 0, 0, 0.8);
+            --card-bg: rgba(255, 255, 255, 0.12);
+            --shadow-color: rgba(255, 215, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            color: var(--text-color);
+            background: var(--background-color);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            font-family: 'Raleway', sans-serif;
+            position: relative;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        header {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        header video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            filter: brightness(0.6) contrast(1.3) saturate(1.1);
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--overlay-color), rgba(10, 10, 10, 0.6));
+            z-index: 2;
+        }
+
+        .header-content {
+            z-index: 3;
+            position: relative;
+            padding: 1rem;
+        }
+
+        .header-photo {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 12px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 0 60px var(--shadow-color), 0 0 20px var(--shadow-color);
+            margin-bottom: 3.5rem;
+            transition: transform 0.8s ease, box-shadow 0.8s ease, filter 0.8s ease;
+            background: #fff;
+            position: relative;
+        }
+
+        .header-photo::before {
+            content: '';
+            position: absolute;
+            top: -25px;
+            left: -20px;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            border: 2px dashed var(--primary-color);
+            animation: rotateFrame 20s infinite linear;
+            z-index: -1;
+        }
+
+        .header-photo:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 80px var(--primary-color), 0 0 30px var(--primary-color);
+            filter: brightness(1.1);
+        }
+
+        .header-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.9), 0 0 20px var(--primary-color);
+            color: var(--text-color);
+        }
+
+        .header-content p {
+            font-size: 2rem;
+            margin-top: 2rem;
+            color: var(--text-color);
+            text-shadow: 0 0 15px var(--shadow-color);
+            font-style: italic;
+            font-weight: 300;
+            max-width: 800px;
+        }
+
+        .auto-play-btn {
+            position: fixed;
+            z-index: 10;
+            background: var(--primary-color);
+            color: var(--background-color);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-family: 'Raleway', sans-serif;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 20px var(--shadow-color);
+            bottom: 30px;
+            right: 30px;
+            touch-action: manipulation;
+        }
+
+        .auto-play-btn:hover {
+            transform: scale(1.1);
+            background: #ffd700;
+        }
+
+        .auto-play-btn.active {
+            background: rgba(255, 111, 97, 0.9);
+        }
+
+        .ia-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 1rem;
+        }
+
+        .ia-input {
+            width: 300px;
+            padding: 1rem;
+            border-radius: 25px;
+            border: 1px solid var(--shadow-color);
+            background: var(--card-bg);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            outline: none;
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+
+        .ia-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .ia-btn {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 183, 235, 0.5);
+            touch-action: manipulation;
+        }
+
+        .ia-btn:hover {
+            transform: scale(1.1);
+            background: #00b7eb;
+        }
+
+        .ia-btn.active {
+            background: rgba(255, 111, 97, 0.9);
+        }
+
+        .ia-avatar {
+            position: fixed;
+            bottom: 200px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: url('https://images.unsplash.com/photo-1515825838458-f2a94b20105a') no-repeat center/cover;
+            box-shadow: 0 0 20px var(--shadow-color);
+            z-index: 11;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .ia-avatar.speaking {
+            opacity: 1;
+            transform: scale(1);
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        .ia-text-box {
+            position: fixed;
+            bottom: 320px;
+            right: 50px;
+            width: 300px;
+            max-height: 200px;
+            padding: 1rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--text-color);
+            font-size: 1rem;
+            line-height: 1.5;
+            box-shadow: 0 0 20px var(--shadow-color);
+            z-index: 12;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            overflow-y: auto;
+            display: none;
+            font-family: 'Raleway', sans-serif;
+            border: 2px solid var(--shadow-color);
+        }
+
+        .ia-text-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px var(--shadow-color);
+            }
+
+            50% {
+                box-shadow: 0 0 40px var(--primary-color);
+            }
+        }
+
+        section {
+            padding: 15rem 4rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .section-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--overlay-color), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        .wave {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 180px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,0V80C300,110 600,50 900,80C1200,110 1200,0 1200,0H0Z" fill="rgba(10,10,10,1)"/></svg>');
+            background-size: cover;
+            z-index: 2;
+            animation: waveMove 15s infinite ease-in-out;
+            filter: drop-shadow(0 0 20px var(--shadow-color));
+        }
+
+        @keyframes waveMove {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(-100px);
+            }
+        }
+
+        @keyframes rotateFrame {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .bio {
+            background: url('https://images.unsplash.com/photo-1505775830697-162ece8a0e76') no-repeat center/cover;
+            text-align: center;
+        }
+
+        .bio h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 30px var(--shadow-color);
+        }
+
+        .bio p {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 1.6rem;
+            line-height: 2.1;
+            color: var(--text-color);
+            z-index: 2;
+            position: relative;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 15px var(--shadow-color);
+            font-weight: 300;
+        }
+
+        .gallery {
+            background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+            text-align: center;
+        }
+
+        .gallery h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 4rem;
+            color: var(--secondary-color);
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 30px rgba(0, 183, 235, 0.9);
+        }
+
+        .gallery-nav {
+            position: sticky;
+            top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            z-index: 2;
+            background: var(--card-bg);
+            padding: 0.5rem;
+            border-radius: 25px;
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+
+        .gallery-btn {
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            font-family: 'Raleway', sans-serif;
+            cursor: pointer;
+            transition: color 0.3s ease, background 0.3s ease;
+            position: relative;
+            z-index: 2;
+            touch-action: manipulation;
+        }
+
+        .gallery-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .gallery-btn.active {
+            background: var(--primary-color);
+            color: var(--background-color);
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+
+        .gallery-btn:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        .gallery-subsection {
+            margin-bottom: 6rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .gallery-subsection.visible {
+            opacity: 1;
+        }
+
+        .gallery-subsection h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1500px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            aspect-ratio: 4 / 3;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 183, 235, 0.5);
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.05);
+        }
+
+        .gallery-item.highlight {
+            animation: highlightGlow 3s ease-in-out forwards;
+        }
+
+        @keyframes highlightGlow {
+            0% {
+                box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
+            }
+
+            50% {
+                box-shadow: 0 0 30px var(--primary-color), 0 0 60px var(--primary-color);
+            }
+
+            100% {
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+            }
+        }
+
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--text-color);
+            padding: 1rem;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .gallery-item:hover .caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .achievements {
+            background: url('https://images.unsplash.com/photo-1533134481-d430b89612f8') no-repeat center/cover;
+            text-align: center;
+        }
+
+        .achievements h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 4rem;
+            color: #ff6f61;
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 30px rgba(255, 111, 97, 0.9);
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 3.5rem;
+            max-width: 1500px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        .achievement-card {
+            background: var(--card-bg);
+            padding: 3.5rem;
+            border-radius: 25px;
+            transition: transform 0.7s ease, box-shadow 0.7s ease, filter 0.7s ease;
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 111, 97, 0.2) 0%, rgba(255, 111, 97, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.7s ease;
+            z-index: -1;
+        }
+
+        .achievement-card:hover::before {
+            opacity: 1;
+        }
+
+        .achievement-card:hover {
+            transform: scale(1.12) rotate(4deg);
+            box-shadow: 0 0 50px rgba(255, 111, 97, 0.9);
+            filter: brightness(1.35);
+        }
+
+        .achievement-card i {
+            font-size: 3rem;
+            color: #ff6f61;
+            margin-bottom: 2rem;
+            transition: transform 0.8s ease;
+        }
+
+        .achievement-card:hover i {
+            transform: rotate(360deg) scale(1.2);
+        }
+
+        .achievement-card h3 {
+            font-size: 1.9rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 0 10px rgba(255, 111, 97, 0.5);
+            color: var(--text-color);
+        }
+
+        .achievement-card p {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            font-weight: 300;
+        }
+
+        .tribute-video {
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center/cover;
+            text-align: center;
+        }
+
+        .tribute-video h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 4rem;
+            color: var(--primary-color);
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 30px var(--shadow-color);
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 0 40px var(--shadow-color);
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+        }
+
+        .ar-section {
+            background: url('https://images.unsplash.com/photo-1519681393784-d120267933ba') no-repeat center/cover;
+            text-align: center;
+        }
+
+        .ar-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            margin-bottom: 4rem;
+            color: var(--primary-color);
+            z-index: 2;
+            position: relative;
+            text-shadow: 0 0 30px var(--shadow-color);
+        }
+
+        .ar-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 15px var(--shadow-color);
+        }
+
+        .ar-container img.qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 2rem auto;
+            display: block;
+            border: 5px solid var(--primary-color);
+            border-radius: 15px;
+        }
+
+        .ar-container p {
+            font-size: 1.6rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .ar-btn {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 183, 235, 0.5);
+            text-decoration: none;
+            touch-action: manipulation;
+        }
+
+        .ar-btn:hover {
+            transform: scale(1.1);
+            background: #00b7eb;
+        }
+
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .social-btn {
+            background: var(--secondary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 15px var(--shadow-color);
+            text-decoration: none;
+            touch-action: manipulation;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.1);
+            background: #00b7eb;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 1.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-line {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--primary-color), rgba(255, 215, 0, 0));
+            z-index: 0;
+            transform: translateX(-50%);
+            transition: height 0.1s ease;
+        }
+
+        /* Responsividad para laptops (hasta 1024px) */
+        @media (max-width: 1024px) {
+            section {
+                padding: 10rem 3rem;
+            }
+
+            .header-photo {
+                width: 300px;
+                height: 300px;
+            }
+
+            .header-photo::before {
+                width: 300px;
+                height: 300px;
+                top: -20px;
+                left: -15px;
+            }
+
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .header-content p {
+                font-size: 1.8rem;
+                max-width: 600px;
+            }
+
+            .bio h2,
+            .gallery h2,
+            .achievements h2,
+            .tribute-video h2,
+            .ar-section h2 {
+                font-size: 3.5rem;
+            }
+
+            .bio p {
+                font-size: 1.4rem;
+                padding: 2rem;
+            }
+
+            .gallery-subsection h3 {
+                font-size: 2.2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .gallery-btn {
+                padding: 0.7rem 1.8rem;
+                font-size: 1.1rem;
+            }
+
+            .gallery-item .caption {
+                font-size: 0.9rem;
+            }
+
+            .achievement-card {
+                padding: 3rem;
+            }
+
+            .achievement-card i {
+                font-size: 2.5rem;
+            }
+
+            .achievement-card h3 {
+                font-size: 1.7rem;
+            }
+
+            .achievement-card p {
+                font-size: 1.2rem;
+            }
+
+            .ar-container img.qr-code {
+                width: 180px;
+                height: 180px;
+            }
+
+            .ar-container p {
+                font-size: 1.4rem;
+            }
+
+            .ia-container {
+                bottom: 90px;
+                right: 20px;
+            }
+
+            .ia-input {
+                width: 280px;
+                font-size: 1rem;
+            }
+
+            .ia-btn {
+                padding: 0.7rem 1.3rem;
+                font-size: 0.9rem;
+            }
+
+            .ia-avatar {
+                width: 90px;
+                height: 90px;
+                bottom: 190px;
+                right: 40px;
+            }
+
+            .ia-text-box {
+                width: 280px;
+                bottom: 300px;
+                right: 40px;
+                font-size: 0.9rem;
+            }
+
+            .auto-play-btn {
+                padding: 0.9rem 1.8rem;
+                font-size: 1.1rem;
+                bottom: 25px;
+                right: 25px;
+            }
+
+            .video-container {
+                max-width: 700px;
+            }
+        }
+
+        /* Responsividad para tablets (hasta 768px) */
+        @media (max-width: 768px) {
+            section {
+                padding: 8rem 2rem;
+                min-height: auto;
+            }
+
+            header video {
+                width: 140%;
+                height: 140%;
+            }
+
+            .header-photo {
+                width: 280px;
+                height: 280px;
+            }
+
+            .header-photo::before {
+                width: 280px;
+                height: 280px;
+                top: -18px;
+                left: -14px;
+            }
+
+            .header-content h1 {
+                font-size: 2rem;
+                letter-spacing: 4px;
+            }
+
+            .header-content p {
+                font-size: 1.5rem;
+                max-width: 500px;
+            }
+
+            .bio h2,
+            .gallery h2,
+            .achievements h2,
+            .tribute-video h2,
+            .ar-section h2 {
+                font-size: 3rem;
+            }
+
+            .bio p {
+                font-size: 1.3rem;
+                padding: 1.5rem;
+            }
+
+            .gallery-subsection h3 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1.2rem;
+            }
+
+            .gallery-item .caption {
+                font-size: 0.8rem;
+            }
+
+            .gallery-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .gallery-nav {
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+
+            .achievement-card {
+                padding: 2.5rem;
+            }
+
+            .achievement-card i {
+                font-size: 2.2rem;
+            }
+
+            .achievement-card h3 {
+                font-size: 1.5rem;
+            }
+
+            .achievement-card p {
+                font-size: 1.1rem;
+            }
+
+            .video-container,
+            .ar-container {
+                max-width: 100%;
+            }
+
+            .ar-container img.qr-code {
+                width: 150px;
+                height: 150px;
+            }
+
+            .ar-container p {
+                font-size: 1.3rem;
+            }
+
+            .ar-btn {
+                padding: 0.8rem 1.8rem;
+                font-size: 1.1rem;
+            }
+
+            .social-share {
+                gap: 1rem;
+            }
+
+            .social-btn {
+                padding: 0.7rem 1.3rem;
+                font-size: 0.9rem;
+            }
+
+            .ia-container {
+                bottom: 80px;
+                right: 15px;
+                align-items: center;
+            }
+
+            .ia-input {
+                width: 250px;
+                font-size: 0.9rem;
+                padding: 0.8rem;
+            }
+
+            .ia-buttons {
+                justify-content: center;
+            }
+
+            .ia-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .ia-avatar {
+                width: 80px;
+                height: 80px;
+                bottom: 180px;
+                right: 30px;
+            }
+
+            .ia-text-box {
+                width: 250px;
+                bottom: 280px;
+                right: 30px;
+                font-size: 0.9rem;
+            }
+
+            .auto-play-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                bottom: 20px;
+                right: 15px;
+            }
+
+            .wave {
+                height: 120px;
+            }
+        }
+
+        /* Responsividad para teléfonos (hasta 576px) */
+        @media (max-width: 576px) {
+            section {
+                padding: 5rem 1rem;
+            }
+
+            header video {
+                width: 160%;
+                height: 160%;
+            }
+
+            .header-photo {
+                width: 200px;
+                height: 200px;
+                border-width: 8px;
+                margin-bottom: 2rem;
+            }
+
+            .header-photo::before {
+                width: 200px;
+                height: 200px;
+                top: -15px;
+                left: -12px;
+                border-width: 1px;
+            }
+
+            .header-content h1 {
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+
+            .header-content p {
+                font-size: 1.2rem;
+                max-width: 90%;
+                margin-top: 1.5rem;
+            }
+
+            .bio h2,
+            .gallery h2,
+            .achievements h2,
+            .tribute-video h2,
+            .ar-section h2 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .bio p {
+                font-size: 1.1rem;
+                padding: 1rem;
+                line-height: 1.8;
+            }
+
+            .gallery-subsection h3 {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .gallery-item {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .gallery-item .caption {
+                font-size: 0.8rem;
+                padding: 0.8rem;
+            }
+
+            .gallery-btn {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            .gallery-nav {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                padding: 0.4rem;
+            }
+
+            .achievements-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .achievement-card {
+                padding: 2rem;
+            }
+
+            .achievement-card i {
+                font-size: 2rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .achievement-card h3 {
+                font-size: 1.3rem;
+            }
+
+            .achievement-card p {
+                font-size: 1rem;
+            }
+
+            .video-container {
+                border-radius: 15px;
+            }
+
+            .ar-container {
+                padding: 2rem;
+            }
+
+            .ar-container img.qr-code {
+                width: 120px;
+                height: 120px;
+                border-width: 3px;
+            }
+
+            .ar-container p {
+                font-size: 1.1rem;
+            }
+
+            .ar-btn {
+                padding: 0.6rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .social-share {
+                gap: 0.8rem;
+                flex-wrap: wrap;
+            }
+
+            .social-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .ia-container {
+                bottom: 60px;
+                right: 0;
+                left: 0;
+                width: 100%;
+                align-items: center;
+                padding: 0 1rem;
+            }
+
+            .ia-input {
+                width: 90%;
+                max-width: 320px;
+                font-size: 0.9rem;
+                padding: 0.7rem;
+            }
+
+            .ia-buttons {
+                justify-content: center;
+            }
+
+            .ia-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .ia-avatar {
+                width: 60px;
+                height: 60px;
+                bottom: 140px;
+                right: 20px;
+            }
+
+            .ia-text-box {
+                width: 90%;
+                max-width: 300px;
+                bottom: 220px;
+                right: 20px;
+                font-size: 0.85rem;
+                padding: 0.8rem;
+            }
+
+            .auto-play-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .wave {
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+    <div class="timeline-line"></div>
+    <button class="auto-play-btn" id="autoPlayBtn" aria-label="Iniciar o pausar reproducción automática">Reproducir
+        Automáticamente</button>
+
+    <div class="ia-container">
+        <input type="text" class="ia-input" id="iaInput" placeholder="Pregunta por escrito a mucer..."
+            aria-label="Escribe una pregunta para la IA">
+        <div class="ia-buttons">
+            <button class="ia-btn" id="voiceBtn" aria-label="Activar reconocimiento de voz">Hablar</button>
+            <button class="ia-btn" id="textBtn" aria-label="Enviar pregunta escrita">Enviar Texto</button>
+        </div>
+    </div>
+    <div class="ia-avatar" id="iaAvatar" aria-hidden="true"></div>
+    <div class="ia-text-box" id="iaTextBox" aria-live="polite" aria-hidden="true"></div>
+
+    <header>
+        <video autoplay muted loop poster="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0">
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-paradise-beach-4392-large.mp4"
+                type="video/mp4">
+            Tu navegador no soporta video.
+        </video>
+        <div class="header-overlay"></div>
+        <div class="header-content">
+            <img src="IMG/Inicio_img.jpeg" alt="Foto de Starling Rosario" class="header-photo">
+            <h1 id="typewriter"></h1>
+            <p>"Una vida que trasciende el tiempo, un alma que ilumina el infinito"</p>
+        </div>
+    </header>
+
+    <section class="bio parallax reveal">
+        <div class="section-overlay"></div>
+        <h2>Historia de Starling Rosario</h2>
+        <p>
+            Starlin rosario nacio el 24 de septiembre de 1976 en el distrito Nacional y crecio en Santo Domingo este se
+            formo académicamente en el instituto fabio amable mota que no fue solo una escuela si no su segundo hogar a
+            los 18 años entro a este centro como docente en el 1994-1995 starling rosario es conocido por su alegría y
+            carácter amigable cualidad que han fortalecido su rol como educador en su vida personal está casado con
+            fatima peña con quien ha formado una hermosa familia de tres hijos. El homenaje que se reinde en esta feria
+            es un justo reconocimiento a su valioso aporte a el centro educativo fabio amable mota institucion que lo
+            vio crecer y a la cual dedico decadas de servicio con entrega y amor
+        </p>
+    </section>
+
+    <section class="gallery parallax reveal">
+        <div class="section-overlay"></div>
+        <h2>Galería de Recuerdos</h2>
+        <div class="gallery-nav" role="tablist">
+            <button class="gallery-btn active" id="childhoodBtn" role="tab" aria-selected="true"
+                aria-controls="childhoodSection">Infancia</button>
+            <button class="gallery-btn" id="adulthoodBtn" role="tab" aria-selected="false"
+                aria-controls="adulthoodSection">Adultez</button>
+            <button class="gallery-btn" id="specialBtn" role="tab" aria-selected="false"
+                aria-controls="specialSection">Momentos Especiales</button>
+        </div>
+        <div class="gallery-subsection childhood visible" id="childhoodSection" role="tabpanel"
+            aria-labelledby="childhoodBtn">
+            <h3>Infancia</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="IMG/img-1.jpeg" alt="Starling en su infancia, 1980" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG/niñes_2.jpeg" alt="Starling jugando de niño, 1982" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG/img-2.jpeg" alt="Starling en la escuela, 1984" loading="lazy">
+                </div>
+                <div class="gallery-item" data-type="childhood-video">
+                    <video controls muted loop>
+                        <source src="IMG/niñes.mp4">
+                        Tu navegador no soporta video.
+                    </video>
+                </div>
+            </div>
+        </div>
+        <div class="gallery-subsection adulthood" id="adulthoodSection" role="tabpanel" aria-labelledby="adulthoodBtn"
+            style="display: none;">
+            <h3>Adultez</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="IMG/galeria_3.jpeg" alt="Starling pintando un paisaje, 1995" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG/galeria_4.jpeg" alt="Starling con amigos, 2000" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG/img-7.jpeg" alt="Starling en su trabajo, 2005" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG/galery_1.jpeg" alt="Starling caminando en el parque, 2010" loading="lazy">
+                </div>
+            </div>
+        </div>
+        <div class="gallery-subsection special" id="specialSection" role="tabpanel" aria-labelledby="specialBtn"
+            style="display: none;">
+            <h3>Momentos Especiales</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="IMG/img-6.jpeg" alt="Starling recibiendo un premio, 2015" loading="lazy">
+                </div>
+                <div class="gallery-item" data-type="singing">
+                    <video controls muted loop>
+                        <source src="IMG/hobbie.mp4">
+                        Tu navegador no soporta video.
+                    </video>
+                </div>
+                <div class="gallery-item" data-type="opinion">
+                    <video controls muted loop>
+                        <source src="IMG/QZSU6337.mp4">
+                        Tu navegador no soporta video.
+                    </video>
+                </div>
+                <div class="gallery-item">
+                    <img src="IMG/img-8.jpeg" alt="Starling " loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="achievements parallax reveal">
+        <div class="section-overlay"></div>
+        <h2>Sus aportes al fabio amable mota</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <i class="fas fa-trophy"></i>
+                <h3></h3>
+                <p>Inplemento la tecnologia de edupague y classroom al fabio amable mota</p>
+            </div>
+            <div class="achievement-card">
+                <i class="fas fa-heart"></i>
+                <h3></h3>
+                <p>Capasito A los docentes en el uso de esta tecnologia</p>
+            </div>
+    </section>
+
+    <section class="tribute-video parallax reveal">
+        <div class="section-overlay"></div>
+        <h2>Un Tributo a Starling Rosario</h2>
+        <div class="video-container">
+            <video controls poster="IMG/fondo negro.jpg">
+                <source src="IMG/">
+                Tu navegador no soporta video.
+            </video>
+        </div>
+    </section>
+
+    <section class="ar-section parallax reveal">
+        <div class="section-overlay"></div>
+        <h2>Código QR</h2>
+        <div class="ar-container">
+            <p>Escanea el código QR con tu cámara móvil para disfrutar la página en honor a Starling Rosario.</p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tu-sitio.com/ar-filter"
+                alt="Código QR para filtro AR" class="qr-code">
+            <a href="https://tu-sitio.com/ar-filter" class="ar-btn" target="_blank"
+                aria-label="Acceder al filtro AR">Escanear</a>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <script>
+        // File loading script
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+            return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+                    var headerRowIndex = filteredData.findIndex((row, index) =>
+                        row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    );
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error(e);
+                    return "";
+                }
+            }
+            return gk_fileData[filename] || "";
+        }
+
+        // Animaciones con GSAP
+        gsap.from(".header-photo", { opacity: 0, scale: 0.5, duration: 2.2, ease: "elastic.out(1, 0.3)" });
+        gsap.from(".header-content h1", { opacity: 0, y: 80, duration: 2, delay: 0.8, ease: "power4.out" });
+        gsap.from(".header-content p", { opacity: 0, y: 50, duration: 2, delay: 1.1, ease: "power4.out" });
+
+        // Fondo Interactivo
+        const header = document.querySelector('header');
+        const video = header.querySelector('video');
+        header.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 40;
+            const y = (e.clientY / window.innerHeight - 0.5) * 40;
+            video.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(1.15)`;
+        });
+
+        // Efecto Typewriter
+        const typewriter = document.getElementById('typewriter');
+        const text = "Starling Rosario";
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                typewriter.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, 80);
+            }
+        }
+        setTimeout(type, 1500);
+
+        // Revelar secciones al hacer scroll
+        function revealSections() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(reveal => {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 250) {
+                    reveal.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", revealSections);
+        revealSections();
+
+        // Toggle Gallery Sections
+        const childhoodBtn = document.getElementById('childhoodBtn');
+        const adulthoodBtn = document.getElementById('adulthoodBtn');
+        const specialBtn = document.getElementById('specialBtn');
+        const childhoodSection = document.getElementById('childhoodSection');
+        const adulthoodSection = document.getElementById('adulthoodSection');
+        const specialSection = document.getElementById('specialSection');
+
+        function showSection(section, btn) {
+            [childhoodSection, adulthoodSection, specialSection].forEach(s => {
+                s.style.display = 'none';
+                s.classList.remove('visible');
+            });
+            [childhoodBtn, adulthoodBtn, specialBtn].forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            section.style.display = 'block';
+            section.classList.add('visible');
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            gsap.from(`#${section.id} .gallery-item`, {
+                opacity: 0,
+                y: 50,
+                stagger: 0.2,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        }
+
+        childhoodBtn.addEventListener('click', () => showSection(childhoodSection, childhoodBtn));
+        adulthoodBtn.addEventListener('click', () => showSection(adulthoodSection, adulthoodBtn));
+        specialBtn.addEventListener('click', () => showSection(specialSection, specialBtn));
+
+        // Keyboard navigation for tabs
+        [childhoodBtn, adulthoodBtn, specialBtn].forEach(btn => {
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    btn.click();
+                }
+            });
+        });
+
+        // Initialize with childhood visible
+        document.addEventListener('DOMContentLoaded', () => showSection(childhoodSection, childhoodBtn));
+
+        // Animación de logros
+        gsap.from(".achievement-card", {
+            opacity: 0,
+            y: 100,
+            stagger: 0.4,
+            duration: 2,
+            ease: "power4.out",
+            scrollTrigger: { trigger: ".achievements", start: "top 65%" }
+        });
+
+        // Animación de video tributo
+        gsap.from(".video-container", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 2,
+            ease: "elastic.out(1, 0.3)",
+            scrollTrigger: { trigger: ".tribute-video", start: "top 65%" }
+        });
+
+        // Animación de sección AR
+        gsap.from(".ar-container", {
+            opacity: 0,
+            scale: 0.8,
+            duration: 2,
+            ease: "elastic.out(1, 0.3)",
+            scrollTrigger: { trigger: ".ar-section", start: "top 65%" }
+        });
+
+        // Línea de tiempo dinámica
+        const timelineLine = document.querySelector('.timeline-line');
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollTop = window.scrollY;
+            const progress = (scrollTop / scrollHeight) * 100;
+            timelineLine.style.height = `${progress}%`;
+        });
+
+        // Partículas de fondo
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        for (let i = 0; i < 100; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                speedX: (Math.random() - 0.5) * 0.8,
+                speedY: (Math.random() - 0.5) * 0.8,
+                color: `rgba(255, ${Math.floor(Math.random() * 155) + 100}, 0, ${Math.random() * 0.5 + 0.2})`
+            });
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+                p.x += p.speedX;
+                p.y += p.speedY;
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Reproducción Automática
+        const autoPlayBtn = document.getElementById('autoPlayBtn');
+        let autoScrollInterval = null;
+        let isAutoPlaying = false;
+        function startAutoPlay() {
+            if (!isAutoPlaying) {
+                isAutoPlaying = true;
+                autoPlayBtn.classList.add('active');
+                autoPlayBtn.textContent = 'Pausar Reproducción';
+                const sections = [
+                    document.querySelector('header').offsetTop,
+                    document.querySelector('.bio').offsetTop,
+                    document.querySelector('.gallery').offsetTop,
+                    document.querySelector('.achievements').offsetTop,
+                    document.querySelector('.tribute-video').offsetTop,
+                    document.querySelector('.ar-section').offsetTop
+                ];
+                let currentSection = 0;
+                autoScrollInterval = setInterval(() => {
+                    if (currentSection < sections.length) {
+                        window.scrollTo({ top: sections[currentSection], behavior: 'smooth' });
+                        currentSection++;
+                    } else {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        currentSection = 0;
+                    }
+                }, 5000);
+            } else {
+                stopAutoPlay();
+            }
+        }
+        function stopAutoPlay() {
+            isAutoPlaying = false;
+            clearInterval(autoScrollInterval);
+            autoPlayBtn.classList.remove('active');
+            autoPlayBtn.textContent = 'Reproducir Automáticamente';
+        }
+        autoPlayBtn.addEventListener('click', startAutoPlay);
+
+        // IA con Reconocimiento de Voz y Texto Mejorado
+        const voiceBtn = document.getElementById('voiceBtn');
+        const textBtn = document.getElementById('textBtn');
+        const iaInput = document.getElementById('iaInput');
+        const iaAvatar = document.getElementById('iaAvatar');
+        const iaTextBox = document.getElementById('iaTextBox');
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.lang = 'es-ES';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+        let isListening = false;
+
+        const personData = {
+            name: "Starling Rosario",
+            birth: "24 de septiembre de 1976",
+            achievements: ["Honra Suprema 2023", "Corazón Infinito", "Eterna Inspiración"],
+            bio: "Starling Rosario es una figura inspiradora que transformó vidas con su bondad desbordante y sueños audaces. Su legado ilumina a todos los que lo conocen.",
+            favoriteColor: "Gris",
+            hobby: ["Cantar"],
+            city: "Santo Domingo Este",
+            quote: "Vive con el corazón abierto y el alma en las estrellas.",
+            purpose: "Inspirar a otros a encontrar su luz interior.",
+            fabioPosition: "Coordinador Técnico",
+            currentPosition: "Coordinador Nacional de Dirección Nacional de Técnico Profesional",
+            children: "3 hijos",
+            wife: "Fátima Peña"
+        };
+
+        function speak(text) {
+            if (!('SpeechSynthesisUtterance' in window)) {
+                console.error("SpeechSynthesis no está soportado en este navegador.");
+                iaTextBox.textContent = "Lo siento, este navegador no soporta la síntesis de voz.";
+                iaTextBox.classList.add('visible');
+                iaTextBox.setAttribute('aria-hidden', 'false');
+                setTimeout(() => {
+                    iaTextBox.classList.remove('visible');
+                    iaTextBox.setAttribute('aria-hidden', 'true');
+                    iaTextBox.textContent = '';
+                }, 3000);
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'es-ES';
+            
+            let voices = speechSynthesis.getVoices();
+            if (voices.length === 0) {
+                speechSynthesis.onvoiceschanged = () => {
+                    voices = speechSynthesis.getVoices();
+                    utterance.voice = voices.find(voice => voice.lang === 'es-ES') || voices[0];
+                    window.speechSynthesis.speak(utterance);
+                };
+            } else {
+                utterance.voice = voices.find(voice => voice.lang === 'es-ES') || voices[0];
+            }
+
+            utterance.onerror = (event) => {
+                console.error("Speech synthesis error:", event.error);
+                iaTextBox.textContent = "Hubo un error al reproducir el audio. Por favor, intenta de nuevo.";
+                iaTextBox.classList.add('visible');
+                iaTextBox.setAttribute('aria-hidden', 'false');
+                setTimeout(() => {
+                    iaTextBox.classList.remove('visible');
+                    iaTextBox.setAttribute('aria-hidden', 'true');
+                    iaTextBox.textContent = '';
+                }, 3000);
+            };
+
+            utterance.onstart = () => {
+                iaAvatar.classList.add('speaking');
+                iaTextBox.textContent = text;
+                iaTextBox.classList.add('visible');
+                iaTextBox.setAttribute('aria-hidden', 'false');
+            };
+
+            utterance.onend = () => {
+                iaAvatar.classList.remove('speaking');
+                iaTextBox.classList.remove('visible');
+                setTimeout(() => {
+                    iaTextBox.textContent = '';
+                    iaTextBox.setAttribute('aria-hidden', 'true');
+                }, 500);
+            };
+
+            if (voices.length > 0) {
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function fuzzyMatch(str, pattern) {
+            str = str.toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            pattern = pattern.toLowerCase().replace(/[^a-z0-9\s]/g, '');
+            const words = str.split(/\s+/);
+            return words.some(word => pattern.includes(word) || word.includes(pattern));
+        }
+
+        function processQuestion(input) {
+            if (!input.trim()) {
+                return "Por favor, haz una pregunta sobre Starling Rosario o su legado.";
+            }
+
+            input = input.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '').trim();
+            let greeting = "";
+            let questions = [input];
+
+            const nameTrigger = /^hola\s*(,\s*)?yo\s*soy\s*starling\s*rosario\b/;
+            const isNameTrigger = nameTrigger.test(input);
+            if (isNameTrigger) {
+                return "¡Hola, Starling Rosario! Soy Mucer, tu asistente virtual. Bienvenido a este homenaje creado para celebrar tu vida y legado. ¿Cómo puedo ayudarte hoy?";
+            }
+
+            const activationPhrase = /^(hola\s*mucer|buenos\s*dias\s*mucer)\b/;
+            const isActivation = activationPhrase.test(input);
+            if (isActivation) {
+                greeting = "Hola, soy Mucer, tu asistente virtual. Estoy aquí para compartir el legado de Starling Rosario. ¿En qué puedo ayudarte?";
+                const remainingInput = input.replace(activationPhrase, "").trim();
+                questions = remainingInput ? remainingInput.split(/\s+y\s+|,|\./).map(q => q.trim()).filter(q => q) : [];
+                if (!questions.length) {
+                    return greeting + " Puedes preguntarme sobre su vida, logros o cualquier cosa que desees saber.";
+                }
+            } else {
+                questions = input.split(/\s+y\s+|,|\./).map(q => q.trim()).filter(q => q);
+            }
+
+            const keywords = {
+                nombre: ["nombre", "quien es", "como se llama"],
+                nacimiento: ["nacimiento", "cuando nacio", "fecha de nacimiento"],
+                logros: ["logros", "que ha logrado", "premios"],
+                biografia: ["biografia", "quien es", "historia"],
+                color: ["color favorito", "color preferido"],
+                hobby: ["hobby", "hoobie", "que le gusta hacer", "pasatiempo", "cantar"],
+                ciudad: ["ciudad", "donde nacio", "lugar"],
+                cita: ["cita", "frase", "quote"],
+                galeria: ["muestra la galeria", "fotos", "imagenes"],
+                infancia: ["fotos de su infancia", "infancia fotos", "niñez fotos", "niñes"],
+                video: ["muestra el video", "tributo", "video"],
+                opinion: ["opinion del señor starlin", "opinion de starling", "que opina starling", "señor starling", "opinion de el"],
+                ar: ["realidad aumentada", "filtro ar", "qr"],
+                proposito: ["proposito", "meta", "por que"],
+                fabioPosition: ["puesto en el fabio", "rol en fabio", "trabajo en fabio", "fabio"],
+                currentPosition: ["puesto actual", "trabajo ahora", "ocupa actualmente", "actual"],
+                children: ["cuantos hijos", "numero de hijos", "hijos tiene"],
+                wife: ["esposa", "como se llama su esposa", "nombre de su esposa"]
+            };
+
+            const responses = [];
+            const quickCombineKeys = ["nombre", "nacimiento", "children", "wife"];
+            let canCombine = questions.length > 1 && questions.every(q => {
+                return quickCombineKeys.some(key => keywords[key].some(pattern => fuzzyMatch(q, pattern)));
+            });
+
+            if (canCombine) {
+                let combinedResponse = `${personData.name} es una figura inspiradora que transformó vidas con su bondad. Nació el ${personData.birth}, tiene ${personData.children} y está casado con ${personData.wife}.`;
+                responses.push(combinedResponse);
+            } else {
+                questions.forEach((question, index) => {
+                    let matched = false;
+                    if (keywords.currentPosition.some(pattern => fuzzyMatch(question, pattern))) {
+                        matched = true;
+                        responses.push(`Actualmente, ${personData.name} ocupa el puesto de ${personData.currentPosition}.`);
+                    } else {
+                        for (const [key, patterns] of Object.entries(keywords)) {
+                            if (key === "currentPosition") continue;
+                            if (patterns.some(pattern => fuzzyMatch(question, pattern))) {
+                                matched = true;
+                                let response = "";
+                                switch (key) {
+                                    case "nombre":
+                                        response = `Su nombre es ${personData.name}.`;
+                                        break;
+                                    case "nacimiento":
+                                        response = `${personData.name} nació el ${personData.birth}, marcando el inicio de un legado eterno.`;
+                                        break;
+                                    case "logros":
+                                        response = `${personData.name} logró grandes cosas, como: ${personData.achievements.join(", ")}.`;
+                                        break;
+                                    case "biografia":
+                                        response = personData.bio;
+                                        break;
+                                    case "color":
+                                        response = `El color favorito de ${personData.name} es el ${personData.favoriteColor}.`;
+                                        break;
+                                    case "hobby":
+                                        response = `${personData.name} disfruta ${personData.hobby.join(", ")}. Mira su video cantando en la galería, sección "Momentos Especiales".`;
+                                        const singingVideoItem = document.querySelector('#specialSection .gallery-item[data-type="singing"]');
+                                        const singingVideo = singingVideoItem?.querySelector('video');
+                                        if (singingVideoItem && singingVideo) {
+                                            showSection(specialSection, specialBtn);
+                                            setTimeout(() => {
+                                                singingVideoItem.classList.add('highlight');
+                                                singingVideoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                singingVideo.play();
+                                                setTimeout(() => singingVideoItem.classList.remove('highlight'), 3000);
+                                            }, 500);
+                                        }
+                                        break;
+                                    case "ciudad":
+                                        response = `${personData.name} nació en ${personData.city}, un lugar que siempre llevó en su corazón.`;
+                                        break;
+                                    case "cita":
+                                        response = `Una frase que captura el espíritu de ${personData.name} es: "${personData.quote}"`;
+                                        break;
+                                    case "galeria":
+                                        response = `La galería de ${personData.name} está en la sección "Galería de Recuerdos". Explora las secciones de Infancia, Adultez y Momentos Especiales.`;
+                                        window.scrollTo({ top: document.querySelector('.gallery').offsetTop, behavior: 'smooth' });
+                                        break;
+                                    case "infancia":
+                                        response = `Las fotos de la infancia de ${personData.name} están en la sección "Galería de Recuerdos" bajo "Infancia".`;
+                                        showSection(childhoodSection, childhoodBtn);
+                                        setTimeout(() => {
+                                            const childhoodItems = document.querySelectorAll('#childhoodSection .gallery-item');
+                                            childhoodItems.forEach(item => {
+                                                item.classList.add('highlight');
+                                                setTimeout(() => item.classList.remove('highlight'), 3000);
+                                            });
+                                            childhoodSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }, 500);
+                                        break;
+                                    case "video":
+                                        response = `El video tributo a ${personData.name} está en la sección "Un Tributo a Starling Rosario".`;
+                                        window.scrollTo({ top: document.querySelector('.tribute-video').offsetTop, behavior: 'smooth' });
+                                        break;
+                                    case "opinion":
+                                        response = `La opinión del señor Starling Rosario está en el video donde expresa sus pensamientos, ubicado en la galería, sección "Momentos Especiales".`;
+                                        const opinionVideoItem = document.querySelector('#specialSection .gallery-item[data-type="opinion"]');
+                                        const opinionVideo = opinionVideoItem?.querySelector('video');
+                                        if (opinionVideoItem && opinionVideo) {
+                                            showSection(specialSection, specialBtn);
+                                            setTimeout(() => {
+                                                opinionVideoItem.classList.add('highlight');
+                                                opinionVideoItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                                opinionVideo.play();
+                                                setTimeout(() => opinionVideoItem.classList.remove('highlight'), 3000);
+                                            }, 500);
+                                        }
+                                        break;
+                                    case "ar":
+                                        response = `El filtro de Realidad Aumentada está en la sección "Código QR".`;
+                                        window.scrollTo({ top: document.querySelector('.ar-section').offsetTop, behavior: 'smooth' });
+                                        break;
+                                    case "proposito":
+                                        response = `El propósito de ${personData.name} era ${personData.purpose}.`;
+                                        break;
+                                    case "fabioPosition":
+                                        response = `En el Instituto Fabio Amable Mota, ${personData.name} ocupó el puesto de ${personData.fabioPosition}.`;
+                                        break;
+                                    case "children":
+                                        response = `${personData.name} tiene ${personData.children}.`;
+                                        break;
+                                    case "wife":
+                                        response = `La esposa de ${personData.name} es ${personData.wife}.`;
+                                        break;
+                                }
+                                responses.push(response);
+                                break;
+                            }
+                        }
+                    }
+                    if (!matched) {
+                        responses.push(`No estoy seguro de cómo responder a "${question}", pero estoy aquí para compartir el legado de ${personData.name}. ¿Quieres saber más sobre su vida?`);
+                    }
+                });
+            }
+
+            let finalResponse = responses.length > 1 && !canCombine
+                ? `Permíteme responder tus preguntas sobre ${personData.name}. ${responses.join(" Además, ")}`
+                : responses[0];
+
+            return greeting ? `${greeting} ${finalResponse}` : finalResponse;
+        }
+
+        voiceBtn.addEventListener('click', () => {
+            if (!isListening) {
+                isListening = true;
+                voiceBtn.classList.add('active');
+                voiceBtn.textContent = 'Escuchando...';
+                recognition.start();
+            } else {
+                isListening = false;
+                recognition.stop();
+            }
+        });
+
+        recognition.onresult = (event) => {
+            const result = event.results[0][0];
+            let transcript = result.transcript;
+            if (result.confidence < 0.7) {
+                transcript = transcript.replace(/starlin/gi, 'starling').replace(/senior/gi, 'señor');
+            }
+            transcript = transcript.charAt(0).toUpperCase() + transcript.slice(1);
+            iaInput.value = transcript;
+            const response = processQuestion(transcript);
+            speak(response);
+            isListening = false;
+            voiceBtn.classList.remove('active');
+            voiceBtn.textContent = 'Hablar';
+        };
+
+        recognition.onend = () => {
+            if (isListening) {
+                isListening = false;
+                voiceBtn.classList.remove('active');
+                voiceBtn.textContent = 'Hablar';
+            }
+        };
+
+        recognition.onerror = (event) => {
+            console.error(`Speech recognition error: ${event.error}`);
+            isListening = false;
+            voiceBtn.classList.remove('active');
+            voiceBtn.textContent = 'Hablar';
+            speak("Lo siento, no pude entenderte. Por favor, intenta de nuevo.");
+        };
+
+        textBtn.addEventListener('click', () => {
+            const question = iaInput.value;
+            const response = processQuestion(question);
+            speak(response);
+            iaInput.value = '';
+        });
+
+        iaInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                textBtn.click();
+            }
+        });
+    </script>
+</body>
+
+</html>
