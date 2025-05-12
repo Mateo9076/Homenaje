@@ -1902,7 +1902,7 @@
                 return "¡Hola, Starling Rosario! Soy Mucer, tu asistente virtual. Bienvenido a este homenaje creado para celebrar tu vida y legado. ¿Cómo puedo ayudarte hoy?";
             }
 
-            const activationPhrase = /^(hola\s*mucer|hola\muser|buenos\s*dias\s*mucer)\b/;
+            const activationPhrase = /^(hola\s*muser|buenos\s*dias\s*muser)\b/;
             const isActivation = activationPhrase.test(input);
             if (isActivation) {
                 greeting = "Hola, soy Mucer, tu asistente virtual. Estoy aquí para compartir el legado de Starling Rosario. ¿En qué puedo ayudarte?";
