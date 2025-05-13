@@ -1,11 +1,11 @@
-        <script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
+<script type="text/javascript">
+    var gk_isXlsx = false;
+    var gk_xlsxFileLookup = {};
+    var gk_fileData = {};
+    function filledCell(cell) {
+        return cell !== '' && cell != null;
+    }
+    function loadFileData(filename) {
         if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
             try {
                 var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
@@ -19,11 +19,11 @@
 
                 // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
                 var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                    row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
                 );
                 // Fallback
                 if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
+                    headerRowIndex = 0;
                 }
 
                 // Convert filtered JSON back to CSV
@@ -36,8 +36,9 @@
             }
         }
         return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+    }
+</script>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -309,10 +310,12 @@
         }
 
         @keyframes pulse {
+
             0%,
             100% {
                 box-shadow: 0 0 20px var(--shadow-color);
             }
+
             50% {
                 box-shadow: 0 0 40px var(--primary-color);
             }
@@ -354,10 +357,12 @@
         }
 
         @keyframes waveMove {
+
             0%,
             100% {
                 transform: translateX(0);
             }
+
             50% {
                 transform: translateX(-100px);
             }
@@ -367,6 +372,7 @@
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
@@ -535,9 +541,11 @@
             0% {
                 box-shadow: 0 0 20px var(--primary-color), 0 0 40px var(--primary-color);
             }
+
             50% {
                 box-shadow: 0 0 30px var(--primary-color), 0 0 60px var(--primary-color);
             }
+
             100% {
                 box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
             }
@@ -771,6 +779,7 @@
                 opacity: 0;
                 transform: translateY(100px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -1521,10 +1530,8 @@
         <h2>Código QR</h2>
         <div class="ar-container">
             <p>Escanea el código QR con tu cámara móvil para disfrutar la página en honor a Starling Rosario.</p>
-            <img src="Qr.jpg"
-                alt="Código QR para filtro AR" class="qr-code">
-            <a href="" class="ar-btn" target="_blank"
-                aria-label="Acceder al filtro AR">Escanear</a>
+            <img src="Qr.jpg" alt="Código QR para filtro AR" class="qr-code">
+            <a href="" class="ar-btn" target="_blank" aria-label="Acceder al filtro AR">Escanear</a>
         </div>
     </section>
 
@@ -1806,8 +1813,8 @@
         const personData = {
             name: "Starling Rosario",
             birth: "24 de septiembre de 1976",
-            achievements: ["Honra Suprema 2023", "Corazón Infinito", "Eterna Inspiración"],
-            bio: "Starling Rosario es una figura inspiradora que transformó vidas con su bondad desbordante y sueños audaces. Su legado ilumina a todos los que lo conocen.",
+            Contributions: ["Inplemento la tecnologia de edupague y classroom al fabio amable mota", "y Capasito A los docentes en el uso de esta tecnologia"],
+            bio: "Starling Rosario nacio el 24 de septiembre de 1976 en el distrito nacional pero se crio en santo domingo este, tiene 3 hijos junto a su esposa fatima peña con su esfuerzo y dedicacion es Coordinador Nacional de Dirección Nacional de Técnico Profesional uno de sus hobby o pasatiempos favoritos es cantar",
             favoriteColor: "Gris",
             hobby: ["Cantar"],
             city: "Santo Domingo Este",
@@ -1835,7 +1842,7 @@
 
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'es-ES';
-            
+
             let voices = speechSynthesis.getVoices();
             if (voices.length === 0) {
                 speechSynthesis.onvoiceschanged = () => {
@@ -1889,7 +1896,7 @@
 
         function processQuestion(input) {
             if (!input.trim()) {
-                return "Por favor, haz una pregunta sobre Starling Rosario o su legado.";
+                return "Por favor, haz una pregunta sobre Starling Rosario";
             }
 
             input = input.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s]/g, '').trim();
@@ -1905,7 +1912,7 @@
             const activationPhrase = /^(hola\s*muser|buenos\s*dias\s*muser)\b/;
             const isActivation = activationPhrase.test(input);
             if (isActivation) {
-                greeting = "Hola, soy Mucer, tu asistente virtual. Estoy aquí para compartir el legado de Starling Rosario. ¿En qué puedo ayudarte?";
+                greeting = "Hola, soy Muser, tu asistente virtual. Estoy aquí para compartir informacion de Starling Rosario. ¿En qué puedo ayudarte hoy ?";
                 const remainingInput = input.replace(activationPhrase, "").trim();
                 questions = remainingInput ? remainingInput.split(/\s+y\s+|,|\./).map(q => q.trim()).filter(q => q) : [];
                 if (!questions.length) {
@@ -1918,7 +1925,7 @@
             const keywords = {
                 nombre: ["nombre", "quien es", "como se llama"],
                 nacimiento: ["nacimiento", "cuando nacio", "fecha de nacimiento"],
-                logros: ["logros", "que ha logrado", "premios"],
+                Aporte: ["Aporte", "que ha aportado al fabio amable mota"],
                 biografia: ["biografia", "quien es", "historia"],
                 color: ["color favorito", "color preferido"],
                 hobby: ["hobby", "hoobie", "que le gusta hacer", "pasatiempo", "cantar"],
@@ -1927,7 +1934,7 @@
                 galeria: ["muestra la galeria", "fotos", "imagenes"],
                 infancia: ["fotos de su infancia", "infancia fotos", "niñez fotos", "niñes"],
                 video: ["muestra el video", "tributo", "video"],
-                opinion: ["opinion del señor starlin", "opinion de starling", "que opina starling", "señor starling", "opinion de el"],
+                opinion: ["opinion sobre starling ", "señor starling", "opinion"],
                 ar: ["realidad aumentada", "filtro ar", "qr"],
                 proposito: ["proposito", "meta", "por que"],
                 fabioPosition: ["puesto en el fabio", "rol en fabio", "trabajo en fabio", "fabio"],
@@ -1943,7 +1950,7 @@
             });
 
             if (canCombine) {
-                let combinedResponse = `${personData.name} es una figura inspiradora que transformó vidas con su bondad. Nació el ${personData.birth}, tiene ${personData.children} y está casado con ${personData.wife}.`;
+                let combinedResponse = `${personData.name} Nació el ${personData.birth}, tiene ${personData.children} y está casado con ${personData.wife}.`;
                 responses.push(combinedResponse);
             } else {
                 questions.forEach((question, index) => {
@@ -1962,10 +1969,10 @@
                                         response = `Su nombre es ${personData.name}.`;
                                         break;
                                     case "nacimiento":
-                                        response = `${personData.name} nació el ${personData.birth}, marcando el inicio de un legado eterno.`;
+                                        response = `${personData.name} nació el ${personData.birth}, marcando el inicio de su historia.`;
                                         break;
-                                    case "logros":
-                                        response = `${personData.name} logró grandes cosas, como: ${personData.achievements.join(", ")}.`;
+                                    case "Aporte":
+                                        response = `${personData.name} logró aportar cosas como: ${personData.Contributions.join(", ")}.`;
                                         break;
                                     case "biografia":
                                         response = personData.bio;
@@ -1974,7 +1981,7 @@
                                         response = `El color favorito de ${personData.name} es el ${personData.favoriteColor}.`;
                                         break;
                                     case "hobby":
-                                        response = `${personData.name} disfruta ${personData.hobby.join(", ")}. Aquí tienes un video de él cantando.`;
+                                        response = `${personData.name} disfruta ${personData.hobby.join(", ")}. Aquí tienes un video de el`;
                                         const singingVideoSrc = "IMG/hobbie.mp4";
                                         showSection(specialSection, specialBtn);
                                         setTimeout(() => {
@@ -2004,7 +2011,7 @@
                                         }, 500);
                                         break;
                                     case "video":
-                                        response = `El video tributo a ${personData.name} está en la sección "Un Tributo a Starling Rosario".`;
+                                       response = `El video tributo a ${personData.name} está en la sección "Un Tributo a Starling Rosario".`;
                                         window.scrollTo({ top: document.querySelector('.tribute-video').offsetTop, behavior: 'smooth' });
                                         break;
                                     case "opinion":
@@ -2016,15 +2023,18 @@
                                         }, 500);
                                         break;
                                     case "ar":
-                                        response = `El filtro de Realidad Aumentada está en la sección "Código QR".`;
+                                        response = `Aqui tienes el codigo qr para disfrutar desde tu dispositivo.`;
                                         window.scrollTo({ top: document.querySelector('.ar-section').offsetTop, behavior: 'smooth' });
                                         break;
                                     case "proposito":
-                                        response = `El propósito de ${personData.name} era ${personData.purpose}.`;
-                                        break;
+                                       response = `El propósito de ${personData.name} era ${personData.purpose}.`;
+                                       break;
                                     case "fabioPosition":
                                         response = `En el Instituto Fabio Amable Mota, ${personData.name} ocupó el puesto de ${personData.fabioPosition}.`;
                                         break;
+                                    case "currentPosition":
+                                    response = `Actualmente, ${personData.name} ocupa el puesto de ${personData.currentPosition}.`;
+                                    break;
                                     case "children":
                                         response = `${personData.name} tiene ${personData.children}.`;
                                         break;
@@ -2117,5 +2127,4 @@
         });
     </script>
 </body>
-
 </html>
